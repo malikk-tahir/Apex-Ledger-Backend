@@ -2,8 +2,10 @@
   "name": "apexbackend",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {
+"scripts": {
     "dev": "tsx watch server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
     "seed": "tsx src/utils/seedUser.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
