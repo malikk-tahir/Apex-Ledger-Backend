@@ -18,7 +18,7 @@ const app: Application = express();
 app.set("trust proxy", 1);
 
 const allowedOrigins: string[] = [
-  process.env.FRONTEND_URL || "https://ledger.awanrealestate.com",
+  process.env.FRONTEND_URL || "https://app.apexmarketing.cc",
   "http://localhost:3000",
 ];
 

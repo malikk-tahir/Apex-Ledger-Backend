@@ -14,7 +14,7 @@ export const sendToken = (user: IUser, statusCode: number, res: Response): void 
     secure: process.env.NODE_ENV === 'production',
     sameSite: (process.env.NODE_ENV === 'production' ? 'none' : 'lax') as 'none' | 'lax',
     domain:
-      process.env.NODE_ENV === 'production' ? '' : undefined,
+      process.env.NODE_ENV === 'production' ? '.apexmarketing.cc' : undefined,
   };
 
   res.status(statusCode).cookie('token', token, options).json({

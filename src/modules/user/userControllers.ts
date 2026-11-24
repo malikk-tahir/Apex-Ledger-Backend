@@ -33,7 +33,7 @@ export const logout: RequestHandler = HandleAsyncError(async (req, res, next) =>
     secure: process.env.NODE_ENV === 'production',
     sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
     domain:
-      process.env.NODE_ENV === 'production' ? '' : undefined,
+      process.env.NODE_ENV === 'production' ? '.apexmarketing.cc' : undefined,
   });
 
   res.status(200).json({
