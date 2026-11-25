@@ -18,12 +18,20 @@ import {
 const router = Router();
 
 router.use(isAuthenticatedUser);
-router.route('/clients/:clientId/payments')
-  .post(upload.single('file'), validate(createClientPaymentSchema), addClientPayment)
-  .get(getClientPayments);
+
+// Specific sub-routes first
 router.get('/clients/:clientId/payments/ledger', getClientMonthlyLedger);
 router.get('/clients/:clientId/payments/month/:monthYear', getMonthPayments);
-router.route('/client-payments/:id')
+
+// Base collection routes
+router
+  .route('/clients/:clientId/payments')
+  .post(upload.single('file'), validate(createClientPaymentSchema), addClientPayment)
+  .get(getClientPayments);
+
+// Single payment record routes
+router
+  .route('/client-payments/:id')
   .put(upload.single('file'), validate(updateClientPaymentSchema), updateClientPayment)
   .patch(upload.single('file'), validate(updateClientPaymentSchema), updateClientPayment)
   .delete(deleteClientPayment);

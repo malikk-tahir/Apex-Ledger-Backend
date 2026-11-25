@@ -34,6 +34,12 @@ const businessCategories = [
   'Other',
 ] as const;
 
+const paymentCategoryEnum = z.enum([
+  'client_amount',
+  'influencer_expense',
+  'fuel_expense',
+]);
+
 const serviceTypes = ['media', 'graphic', 'web', 'package', 'all'] as const;
 
 export const createClientSchema = z.object({
@@ -56,17 +62,20 @@ export const updateClientSchema = z.object({
 
 
 // ==================== CLIENT PAYMENT VALIDATORS ====================
+
 export const createClientPaymentSchema = z.object({
   body: z.object({
     monthYear: z.string().optional(),
+    category: paymentCategoryEnum.optional(),
     amountPaid: z.coerce.number({ message: 'Amount paid is required' }).positive(),
     paymentType: z.enum(['card', 'cash', 'bank_transfer', 'online']).optional(),
     paymentDate: z.string().optional(),
+    note: z.string().trim().max(500).optional(),
   }),
 });
 
 export const updateClientPaymentSchema = z.object({
-  body: createClientPaymentSchema.shape.body.partial(),
+  body: createClientPaymentSchema.partial(),
 });
 
 
